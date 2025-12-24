@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Books</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- FILTERS -->
+  <ion-searchbar
+    placeholder="Search by title"
+    debounce="500"
+    [(ngModel)]="filters.title"
+    (ionInput)="loadBooks()">
+  </ion-searchbar>
+
+  <!-- SORT + FILTER ROW -->
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="6">
+        <ion-button color="light" id="sort-trigger">
+          <ion-icon name="filter" slot="start"></ion-icon>
+          Sort
+        </ion-button>
+
+        <ion-popover #popover trigger="sort-trigger" triggerAction="click">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-list lines="none">
+                <ion-radio-group value="price,asc" (ionChange)="handleSortChange()" [(ngModel)]="filters.sort">
+                  <ion-item>
+                    <ion-radio value="price,asc">Price <ion-icon name="arrow-up-outline"></ion-icon></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-radio value="price,desc">Price <ion-icon name="arrow-down-outline"></ion-icon></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-right">
+        <ion-button color="light" (click)="isFilterPanelOpened = !isFilterPanelOpened">
+          <ion-icon name="funnel" slot="start"></ion-icon>
+          Filter
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    @if (isFilterPanelOpened) {
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item lines="none">
+            <ion-select
+              label="Author"
+              placeholder="Select author"
+              [(ngModel)]="filters.authorId"
+              (ionChange)="loadBooks()">
+              @for (author of authors; track author.id) {
+                <ion-select-option
+                  [value]="author.id">
+                  {{ author.name }}
+                </ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <ion-item lines="none">
+            <ion-select
+              label="Genre"
+              placeholder="Select genre"
+              [(ngModel)]="filters.genreId"
+              (ionChange)="loadBooks()">
+              @for (genre of genres; track genre.id) {
+                <ion-select-option
+                  [value]="genre.id">
+                  {{ genre.name }}
+                </ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    }
+  </ion-grid>
+
+  <!-- BOOKS GRID -->
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let book of books">
+
+        <ion-card>
+
+          <img
+            [src]="apiBaseUrl + book.imageUrl"
+            alt="Book image"
+            height="300px" width="100%"
+          />
+
+          <ion-card-header>
+            <ion-card-title>{{ book.title }}</ion-card-title>
+            <ion-card-subtitle>{{ book.authorName }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>
+              <ion-chip *ngFor="let g of book.genres">
+                {{ g }}
+              </ion-chip>
+            </p>
+
+            <h2>{{ book.price | currency:'RSD' }}</h2>
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
