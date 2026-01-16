@@ -25,7 +25,7 @@
         <ion-popover #popover trigger="sort-trigger" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
-              <ion-list lines="none">
+              <ion-list [lines]="'none'">
                 <ion-radio-group value="price,asc" (ionChange)="handleSortChange()" [(ngModel)]="filters.sort">
                   <ion-item>
                     <ion-radio value="price,asc">Price <ion-icon name="arrow-up-outline"></ion-icon></ion-radio>
@@ -90,39 +90,39 @@
   <!-- BOOKS GRID -->
   <ion-grid>
     <ion-row>
-      <ion-col
-        size="12"
-        size-sm="6"
-        size-md="4"
-        size-lg="3"
-        *ngFor="let book of books">
+      @for (book of books; track book.id) {
+        <ion-col
+          size="12"
+          size-sm="6"
+          size-md="4"
+          size-lg="3">
 
-        <ion-card>
+          <ion-card>
+            <img
+              [src]="apiBaseUrl + book.imageUrl"
+              alt="Book image"
+              height="300px" width="100%"
+            />
 
-          <img
-            [src]="apiBaseUrl + book.imageUrl"
-            alt="Book image"
-            height="300px" width="100%"
-          />
+            <ion-card-header>
+              <ion-card-title>{{ book.title }}</ion-card-title>
+              <ion-card-subtitle>{{ book.authorName }}</ion-card-subtitle>
+            </ion-card-header>
 
-          <ion-card-header>
-            <ion-card-title>{{ book.title }}</ion-card-title>
-            <ion-card-subtitle>{{ book.authorName }}</ion-card-subtitle>
-          </ion-card-header>
+            <ion-card-content>
+              @for (genre of book.genres; track genre) {
+                <ion-chip class="genre-chip">
+                  {{ genre }}
+                </ion-chip>
+              }
 
-          <ion-card-content>
-            <p>
-              <ion-chip *ngFor="let g of book.genres">
-                {{ g }}
-              </ion-chip>
-            </p>
+              <h2>{{ book.price | number: '1.2-2' }}</h2>
+            </ion-card-content>
 
-            <h2>{{ book.price | currency:'RSD' }}</h2>
-          </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
 
-        </ion-card>
-
-      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

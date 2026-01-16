@@ -11,7 +11,6 @@ export class BookService {
   private http = inject(HttpClient);
 
   searchBooks(params: any) {
-    console.log(params);
     return this.http.get<SearchResponse<Book>>(this.apiUrl + '/search', { params });
   }
 }

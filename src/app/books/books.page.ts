@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, viewChild} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {
   IonButton,
   IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip,
@@ -15,6 +15,10 @@ import {
 import {Book} from "./model/book.model";
 import {BookService} from "./service/book-service";
 import {BookFilterParams} from "./model/book-filter-params.model";
+import {Author} from "./model/author.model";
+import {AuthorService} from "./service/author-service";
+import {GenreService} from "./service/genre-service";
+import {Genre} from "./model/genre.model";
 
 @Component({
   selector: 'app-books',
@@ -46,7 +50,7 @@ import {BookFilterParams} from "./model/book-filter-params.model";
     IonRadioGroup,
     IonRadio,
     IonSelect,
-    IonSelectOption
+    IonSelectOption,
   ]
 })
 export class BooksPage implements OnInit {
@@ -54,8 +58,8 @@ export class BooksPage implements OnInit {
   apiBaseUrl = 'http://localhost:8080';
 
   books: Book[] = [];
-  authors: any[] = [];
-  genres: any[] = [];
+  authors: Author[] = [];
+  genres: Genre[] = [];
 
   filters: any = {
     authorId: null,
@@ -67,6 +71,8 @@ export class BooksPage implements OnInit {
   isFilterPanelOpened = false;
 
   private bookService = inject(BookService);
+  private authorService = inject(AuthorService);
+  private genreService = inject(GenreService);
   popover = viewChild(IonPopover);
 
   ngOnInit() {
@@ -99,23 +105,13 @@ export class BooksPage implements OnInit {
   }
 
   loadAuthors() {
-    // GET /api/authors
-    this.authors = [
-      { id: 1, name: 'George Orwell' },
-      { id: 2, name: 'Jane Austen' }
-    ];
+    this.authorService.getAllAuthors()
+      .subscribe(res => this.authors = res);
   }
 
   loadGenres() {
-    // GET /api/genres
-    this.genres = [
-      { id: 1, name: 'Novel' },
-      { id: 2, name: 'Science Fiction' }
-    ];
-  }
-
-  onSearch() {
-    this.loadBooks();
+    this.genreService.getAllGenres()
+      .subscribe(res => this.genres = res);
   }
 
   handleSortChange() {
