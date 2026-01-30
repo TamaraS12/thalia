@@ -13,4 +13,8 @@ export class BookService {
   searchBooks(params: any) {
     return this.http.get<SearchResponse<Book>>(this.apiUrl + '/search', { params });
   }
+
+  getById(id: number){
+    return this.http.get<Book>(this.apiUrl + '/' + id);
+  }
 }

@@ -2,13 +2,13 @@ import {Component, inject, OnInit, viewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {
-  IonButton,
-  IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip,
+  IonBadge,
+  IonButton, IonButtons,
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader, IonIcon, IonItem, IonList, IonPopover, IonRadio, IonRadioGroup,
-  IonRow, IonSearchbar, IonSelect, IonSelectOption,
+  IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonMenuButton, IonPopover, IonRadio, IonRadioGroup,
+  IonRow, IonSearchbar, IonSelect, IonSelectOption, IonThumbnail,
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
@@ -19,6 +19,7 @@ import {Author} from "./model/author.model";
 import {AuthorService} from "./service/author-service";
 import {GenreService} from "./service/genre-service";
 import {Genre} from "./model/genre.model";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-books',
@@ -32,15 +33,9 @@ import {Genre} from "./model/genre.model";
     IonToolbar,
     CommonModule,
     FormsModule,
-    IonCard,
     IonGrid,
     IonRow,
     IonCol,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonChip,
     IonSearchbar,
     IonButton,
     IonIcon,
@@ -51,6 +46,13 @@ import {Genre} from "./model/genre.model";
     IonRadio,
     IonSelect,
     IonSelectOption,
+    IonMenuButton,
+    IonButtons,
+    IonBadge,
+    IonThumbnail,
+    IonImg,
+    IonLabel,
+    RouterLink,
   ]
 })
 export class BooksPage implements OnInit {
@@ -74,6 +76,8 @@ export class BooksPage implements OnInit {
   private authorService = inject(AuthorService);
   private genreService = inject(GenreService);
   popover = viewChild(IonPopover);
+
+  cartItemsSize = 0;
 
   ngOnInit() {
     this.loadAuthors();

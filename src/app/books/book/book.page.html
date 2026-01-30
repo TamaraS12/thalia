@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>{{book?.title}}</ion-title>
+
+    <ion-button slot="end" fill="clear" class="cart-button">
+      <ion-icon name="cart" color="dark" size="large"></ion-icon>
+      <ion-badge color="danger" class="cart-badge">{{cartItemsSize}}</ion-badge>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <img
+      [src]="apiBaseUrl + book?.imageUrl"
+      alt="Book image"
+      height="350px" width="100%"
+    />
+
+    <ion-card-header>
+      <ion-card-title>{{ book?.title }}</ion-card-title>
+      <ion-card-subtitle>{{ book?.authorName }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-text class="description">
+        {{book?.description}}
+      </ion-text>
+      @for (genre of book?.genres; track genre) {
+        <ion-chip class="genre-chip">
+          {{ genre }}
+        </ion-chip>
+      }
+
+      <h2>{{ book?.price | number: '1.2-2' }}</h2>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col size="8">
+        <ion-input name="quantity" label="Quantity" labelPlacement="floating" fill="outline" placeholder="Enter quantity"></ion-input>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button  size="large" type="submit" expand="block" class="add-to-cart-button">
+          <ion-icon name="cart"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

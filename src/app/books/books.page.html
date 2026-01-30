@@ -1,6 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
     <ion-title>Books</ion-title>
+
+    <ion-button slot="end" fill="clear" class="cart-button">
+      <ion-icon name="cart" color="dark" size="large"></ion-icon>
+      <ion-badge color="danger" class="cart-badge">{{cartItemsSize}}</ion-badge>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -90,38 +99,29 @@
   <!-- BOOKS GRID -->
   <ion-grid>
     <ion-row>
-      @for (book of books; track book.id) {
         <ion-col
           size="12"
           size-sm="6"
           size-md="4"
           size-lg="3">
 
-          <ion-card>
-            <img
-              [src]="apiBaseUrl + book.imageUrl"
-              alt="Book image"
-              height="300px" width="100%"
-            />
-
-            <ion-card-header>
-              <ion-card-title>{{ book.title }}</ion-card-title>
-              <ion-card-subtitle>{{ book.authorName }}</ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-              @for (genre of book.genres; track genre) {
-                <ion-chip class="genre-chip">
-                  {{ genre }}
-                </ion-chip>
-              }
-
-              <h2>{{ book.price | number: '1.2-2' }}</h2>
-            </ion-card-content>
-
-          </ion-card>
+          <ion-list>
+            @for (book of books; track book.id) {
+              <ion-item
+                [routerLink]="['/', 'books', book.id]"
+                detail
+              >
+                <ion-thumbnail slot="start">
+                  <ion-img [src]="apiBaseUrl + book?.imageUrl"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <h2>{{ book.title }}</h2>
+                  <p>{{ book.authorName }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
         </ion-col>
-      }
 
     </ion-row>
   </ion-grid>
