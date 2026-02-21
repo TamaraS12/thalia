@@ -6,7 +6,18 @@ import {routes} from './app/app.routes';
 import {AppComponent} from './app/app.component';
 import {provideHttpClient} from "@angular/common/http";
 import {addIcons} from "ionicons";
-import {arrowDownOutline, arrowUpOutline, book, cart, filter, funnel, newspaper, power} from "ionicons/icons";
+import {
+  arrowDownOutline,
+  arrowUpOutline,
+  book,
+  cart, checkmarkCircleOutline,
+  create,
+  filter,
+  funnel,
+  newspaper, paperPlane,
+  power,
+  trash
+} from "ionicons/icons";
 
 addIcons({
   'funnel': funnel,
@@ -16,7 +27,11 @@ addIcons({
   'book': book,
   'newspaper': newspaper,
   'cart': cart,
-  'power': power
+  'power': power,
+  'trash': trash,
+  'create': create,
+  'paper-plane': paperPlane,
+  'checkmark-circle-outline': checkmarkCircleOutline
 
 });
 

@@ -12,14 +12,15 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
-import {Book} from "./model/book.model";
-import {BookService} from "./service/book-service";
-import {BookFilterParams} from "./model/book-filter-params.model";
-import {Author} from "./model/author.model";
-import {AuthorService} from "./service/author-service";
-import {GenreService} from "./service/genre-service";
-import {Genre} from "./model/genre.model";
+import {Book} from "../model/book.model";
+import {BookService} from "../service/book-service";
+import {BookFilterParams} from "../model/book-filter-params.model";
+import {Author} from "../model/author.model";
+import {AuthorService} from "../service/author-service";
+import {GenreService} from "../service/genre-service";
+import {Genre} from "../model/genre.model";
 import {RouterLink} from "@angular/router";
+import {CartService} from "../service/cart-service";
 
 @Component({
   selector: 'app-books',
@@ -75,9 +76,10 @@ export class BooksPage implements OnInit {
   private bookService = inject(BookService);
   private authorService = inject(AuthorService);
   private genreService = inject(GenreService);
+  private cartService= inject(CartService);
   popover = viewChild(IonPopover);
 
-  cartItemsSize = 0;
+  cartSize = this.cartService.cartSize;
 
   ngOnInit() {
     this.loadAuthors();

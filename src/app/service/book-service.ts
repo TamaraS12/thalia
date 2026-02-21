@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {SearchResponse} from "../../shared/model/search-response.model";
+import {SearchResponse} from "../shared/model/search-response.model";
 import {Book} from "../model/book.model";
 
 @Injectable({

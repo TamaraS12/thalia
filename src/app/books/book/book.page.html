@@ -6,15 +6,15 @@
 
     <ion-title>{{book?.title}}</ion-title>
 
-    <ion-button slot="end" fill="clear" class="cart-button">
+    <ion-button slot="end" fill="clear" class="cart-button" routerLink="/cart">
       <ion-icon name="cart" color="dark" size="large"></ion-icon>
-      <ion-badge color="danger" class="cart-badge">{{cartItemsSize}}</ion-badge>
+      <ion-badge color="danger" class="cart-badge">{{cartSize()}}</ion-badge>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card [formGroup]="form">
     <img
       [src]="apiBaseUrl + book?.imageUrl"
       alt="Book image"
@@ -41,10 +41,20 @@
 
     <ion-row>
       <ion-col size="8">
-        <ion-input name="quantity" label="Quantity" labelPlacement="floating" fill="outline" placeholder="Enter quantity"></ion-input>
+        <ion-input name="quantity"
+                   label="Quantity"
+                   labelPlacement="floating"
+                   fill="outline"
+                   placeholder="Enter quantity"
+                   type="number"
+                   formControlName="quantity"></ion-input>
       </ion-col>
       <ion-col size="4">
-        <ion-button  size="large" type="submit" expand="block" class="add-to-cart-button">
+        <ion-button  size="large"
+                     type="submit"
+                     expand="block"
+                     class="add-to-cart-button"
+                     (click)="handleCartItemClicked()">
           <ion-icon name="cart"></ion-icon>
         </ion-button>
       </ion-col>

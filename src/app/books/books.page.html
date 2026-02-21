@@ -6,9 +6,9 @@
 
     <ion-title>Books</ion-title>
 
-    <ion-button slot="end" fill="clear" class="cart-button">
+    <ion-button slot="end" fill="clear" class="cart-button" routerLink="/cart">
       <ion-icon name="cart" color="dark" size="large"></ion-icon>
-      <ion-badge color="danger" class="cart-badge">{{cartItemsSize}}</ion-badge>
+      <ion-badge color="danger" class="cart-badge">{{cartSize()}}</ion-badge>
     </ion-button>
   </ion-toolbar>
 </ion-header>
