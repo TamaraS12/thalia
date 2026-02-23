@@ -43,6 +43,6 @@ export class CartPage implements OnInit {
   }
 
   handleOrder() {
-
+    this.router.navigate(['order']);
   }
 }

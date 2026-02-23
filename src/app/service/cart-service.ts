@@ -47,4 +47,11 @@ export class CartService {
       }
     });
   }
+
+  resetCart(): void {
+    this.cart.set({
+      items: [],
+      totalAmount: 0
+    });
+  }
 }

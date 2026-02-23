@@ -10,7 +10,7 @@ import {
   arrowDownOutline,
   arrowUpOutline,
   book,
-  cart, checkmarkCircleOutline,
+  cart, checkmarkCircleOutline, cloudDone,
   create,
   filter,
   funnel,
@@ -31,7 +31,8 @@ addIcons({
   'trash': trash,
   'create': create,
   'paper-plane': paperPlane,
-  'checkmark-circle-outline': checkmarkCircleOutline
+  'checkmark-circle-outline': checkmarkCircleOutline,
+  'cloud-done': cloudDone
 
 });
 
