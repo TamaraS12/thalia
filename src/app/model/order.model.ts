@@ -3,6 +3,7 @@ export interface Order {
   country: string;
   city: string;
   address: string;
+  orderDate?: Date;
   totalAmount: number;
   items: OrderItem[];
 }
@@ -10,6 +11,7 @@ export interface Order {
 export interface OrderItem {
   id?: number;
   bookId: number;
+  bookTitle?: string;
   quantity: number;
   amount: number;
 }

@@ -26,4 +26,8 @@ export const routes: Routes = [
     path: 'order',
     loadComponent: () => import('./orders/order/order.page').then( m => m.OrderPage)
   },
+  {
+    path: 'orders',
+    loadComponent: () => import('./orders/orders.page').then( m => m.OrdersPage)
+  },
 ];

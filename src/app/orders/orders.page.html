@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Orders</ion-title>
+
+    <ion-button slot="end" fill="clear" class="cart-button" routerLink="/cart">
+      <ion-icon name="cart" color="dark" size="large"></ion-icon>
+      <ion-badge color="danger" class="cart-badge">{{cartSize()}}</ion-badge>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-accordion-group expand="inset">
+          @for (order of orders; track order.id) {
+            <ion-accordion [value]="order.id">
+              <ion-item slot="header" color="light">
+                <ion-label>
+                  <h2>{{ order.orderDate | date:'fullDate' }}</h2>
+                  <h2>{{ order.country }}, {{ order.city }}, {{ order.address }} </h2>
+                </ion-label>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                @for (item of order.items; track item.id){
+                <ion-item class="item">
+                  <ion-icon slot="start" name="book"></ion-icon>
+                  <p> {{item.quantity}} x {{item.bookTitle}}</p>
+                </ion-item>
+                }
+                <ion-item><p>{{order.totalAmount | currency}}</p>  </ion-item>
+              </div>
+            </ion-accordion>
+          }
+
+        </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
