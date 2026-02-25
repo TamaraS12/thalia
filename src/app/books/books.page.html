@@ -66,6 +66,9 @@
               placeholder="Select author"
               [(ngModel)]="filters.authorId"
               (ionChange)="loadBooks()">
+              <ion-select-option [value]="null">
+                All authors
+              </ion-select-option>
               @for (author of authors; track author.id) {
                 <ion-select-option
                   [value]="author.id">
@@ -83,6 +86,9 @@
               placeholder="Select genre"
               [(ngModel)]="filters.genreId"
               (ionChange)="loadBooks()">
+              <ion-select-option [value]="null">
+                All genres
+              </ion-select-option>
               @for (genre of genres; track genre.id) {
                 <ion-select-option
                   [value]="genre.id">

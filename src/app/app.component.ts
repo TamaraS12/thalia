@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
   IonApp,
   IonContent,
@@ -9,7 +9,7 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -17,5 +17,12 @@ import {RouterLink} from "@angular/router";
   imports: [IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonIcon, RouterLink, IonMenuToggle],
 })
 export class AppComponent {
+  private router = inject(Router);
+
   constructor() {}
+
+  handleLogout() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login', { replaceUrl: true });
+  }
 }

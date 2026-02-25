@@ -8,7 +8,7 @@ import {
   IonGrid,
   IonHeader, IonIcon,
   IonItem, IonLabel,
-  IonList, IonMenuButton,
+  IonMenuButton,
   IonRow,
   IonTitle,
   IonToolbar
@@ -23,7 +23,7 @@ import {CartService} from "../service/cart-service";
   templateUrl: './orders.page.html',
   styleUrls: ['./orders.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonCol, IonList, IonItem, IonLabel, IonIcon, IonAccordion, IonAccordionGroup, IonButtons, IonMenuButton, IonBadge, IonButton, RouterLink]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonCol, IonItem, IonLabel, IonIcon, IonAccordion, IonAccordionGroup, IonButtons, IonMenuButton, IonBadge, IonButton, RouterLink]
 })
 export class OrdersPage implements OnInit {
   private orderService = inject(OrderService);

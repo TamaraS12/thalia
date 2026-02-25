@@ -4,7 +4,7 @@ import {IonicRouteStrategy, provideIonicAngular} from '@ionic/angular/standalone
 
 import {routes} from './app/app.routes';
 import {AppComponent} from './app/app.component';
-import {provideHttpClient} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {addIcons} from "ionicons";
 import {
   arrowDownOutline,
@@ -18,6 +18,7 @@ import {
   power,
   trash
 } from "ionicons/icons";
+import {AuthInterceptor} from "./app/interceptor/auth-interceptor";
 
 addIcons({
   'funnel': funnel,
@@ -41,6 +42,13 @@ bootstrapApplication(AppComponent, {
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient()
+    provideHttpClient(
+      withInterceptorsFromDi()
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
   ],
 });
