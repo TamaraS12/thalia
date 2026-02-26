@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {SearchResponse} from "../shared/model/search-response.model";
 import {Book} from "../model/book.model";
 
 @Injectable({
@@ -11,7 +10,7 @@ export class BookService {
   private http = inject(HttpClient);
 
   searchBooks(params: any) {
-    return this.http.get<SearchResponse<Book>>(this.apiUrl + '/search', { params });
+    return this.http.get<Book[]>(this.apiUrl + '/search', { params });
   }
 
   getById(id: number){

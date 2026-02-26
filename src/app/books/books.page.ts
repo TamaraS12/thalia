@@ -107,7 +107,7 @@ export class BooksPage implements OnInit {
     }
 
     this.bookService.searchBooks(params)
-      .subscribe(res => this.books = res.content);
+      .subscribe(res => this.books = res);
   }
 
   loadAuthors() {

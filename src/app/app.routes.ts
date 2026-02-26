@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import {authGuard} from "./guard/auth-guard-guard";
+import {authGuard} from "./guard/auth-guard";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'books',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
